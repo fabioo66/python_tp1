@@ -5,8 +5,8 @@ words = ["python", "programación", "computadora", "código", "desarrollo", "int
 
 # Elegir una palabra al azar
 secret_word = random.choice(words)
-# Número máximo de intentos permitidos
-max_attempts = 10
+# Número máximo de intentos permitidos : 10
+failed_attempts = 0
 # Lista para almacenar las letras adivinadas
 guessed_letters = []
 
@@ -17,13 +17,14 @@ word_displayed = "_" * len(secret_word)
 # Mostrarla palabra parcialmente adivinada
 print(f"Palabra: {word_displayed}")
 
-for i in range(max_attempts):
+i_won = False
+while failed_attempts != 10 and not i_won:
     # Pedir al jugador que ingrese una letra
     letter = input("Ingresa una letra: ").lower()
     
     # Verificar si no es vacio (punto 7a)
     if letter == "":
-        letter = input("No ingresaste ninguna letra, pay attention bro") 
+        letter = input("No ingresaste ninguna letra, pay attention bro ") 
 
     # Verificar si la letra ya ha sido adivinada
     if letter in guessed_letters:
@@ -38,6 +39,8 @@ for i in range(max_attempts):
         print("¡Bien hecho! La letra está en la palabra.")
     else:
         print("Lo siento, la letra no está en la palabra.")
+        failed_attempts += 1
+        print(f"Numero de fallos : {failed_attempts}")
 
     # Mostrar la palabra parcialmente adivinada
     letters = []
@@ -52,7 +55,9 @@ for i in range(max_attempts):
     # Verificar si se ha adivinado la palabra completa
     if word_displayed == secret_word:
         print(f"¡Felicidades! Has adivinado la palabra secreta: {secret_word}")
-        break
-else:  
-    print(f"¡Oh no! Has agotado tus {max_attempts} intentos.")
+        i_won = True
+
+#se quedo sin intentos
+if not i_won:  
+    print(f"¡Oh no! Has agotado tus {failed_attempts} intentos fallidos.")
     print(f"La palabra secreta era: {secret_word}")
