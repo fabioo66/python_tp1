@@ -21,6 +21,10 @@ for i in range(max_attempts):
     # Pedir al jugador que ingrese una letra
     letter = input("Ingresa una letra: ").lower()
     
+    # Verificar si no es vacio (punto 7a)
+    if letter == "":
+        letter = input("No ingresaste ninguna letra, pay attention bro") 
+
     # Verificar si la letra ya ha sido adivinada
     if letter in guessed_letters:
         print("Ya has intentado con esa letra. Intenta con otra.")
